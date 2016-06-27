@@ -42,17 +42,6 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 namespace :deploy do
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      within release_path do
-        execute :bundle, :exec, :pumactl, :restart
-      end
-    end
-  end
-
-  after :publishing, :restart
-
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:

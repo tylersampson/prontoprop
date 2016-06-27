@@ -9,8 +9,8 @@ class CreateLeases < ActiveRecord::Migration[5.0]
       t.date :end_on
       t.decimal :deposit_amount, precision: 14, scale: 2
       t.string :deposit_held_by
-      t.references :lessor
-      t.references :lessee
+      t.references :lessor, references: :contacts
+      t.references :lessee, references: :contacts
       t.decimal :lease_fee, precision: 14, scale: 2
       t.decimal :inspection_fee, precision: 14, scale: 2
       t.decimal :credit_check_fee, precision: 14, scale: 2
@@ -21,7 +21,7 @@ class CreateLeases < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_foreign_key :leases, :contacts, column_name: :lessor_id
-    add_foreign_key :leases, :contacts, column_name: :lessee_id
+    add_foreign_key :leases, :contacts, column: :lessor_id
+    add_foreign_key :leases, :contacts, column: :lessee_id
   end
 end
