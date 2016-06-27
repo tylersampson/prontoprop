@@ -1,0 +1,49 @@
+aside#left-panel
+  span.minifyme data-action="minifyMenu" = icon('arrow-circle-left hit')
+  .login-info
+    span
+      = link_to 'javascript:;', id: 'show-shortcut', 'data-action': 'toggleShortcut' do
+        = gravatar_img_tag current_user
+        span = current_user&.email || "Guest"
+    
+  nav
+    ul
+      li = link_to root_path, title: 'Dashboard' do
+        = icon('home fa-lg fa-fw')
+        span.menu-item-parent = t('.dashboard')
+      
+      - if policy(Agent).show?
+        li = link_to agents_path, title: Agent.model_name.human(count: 10) do
+          = icon 'users fa-lg fa-fw'
+          span.menu-item-parent = Agent.model_name.human(count: 10)
+      
+      - if policy(Lease).show?
+        li = link_to leases_path, title: Lease.model_name.human(count: 10) do
+          = icon 'file-text fa-lg fa-fw'
+          span.menu-item-parent = Lease.model_name.human(count: 10)
+        
+      - if policy(Sale).show?
+        li = link_to sales_path, title: Sale.model_name.human(count: 10) do
+          = icon 'money fa-lg fa-fw'
+          span.menu-item-parent = Sale.model_name.human(count: 10)
+
+      - if policy(Rental).show?
+        li = link_to rentals_path, title: Rental.model_name.human(count: 10) do
+          = icon 'calendar-check-o fa-lg fa-fw'
+          span.menu-item-parent = Rental.model_name.human(count: 10)
+
+      li 
+        = link_to '#', title: I18n.t('.settings') do
+          = icon 'wrench fa-lg fa-fw'
+          span.menu-item-parent = t('.settings')
+        ul
+          - if policy(Bank).show?
+            li = link_to Bank.model_name.human(count: 10), banks_path
+          - if policy(Attorney).show?
+            li = link_to Attorney.model_name.human(count: 10), attorneys_path
+          - if policy(Originator).show?
+            li = link_to Originator.model_name.human(count: 10), originators_path
+          - if policy(Deductable).show?
+            li = link_to Deductable.model_name.human(count: 10), deductables_path
+          - if policy(Status).show?
+            li = link_to Status.model_name.human(count: 10), statuses_path

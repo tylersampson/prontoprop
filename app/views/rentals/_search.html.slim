@@ -1,0 +1,15 @@
+#filters.collapse 
+  .padding-10
+    = search_form_for @q do |f|
+      .row
+        .col-sm-3.form-group
+          = f.label :lease_address_street_name_or_lease_address_complex_cont
+          = f.text_field :lease_address_street_name_or_lease_address_complex_cont, class: 'form-control input-xs'
+        .col-sm-3.form-group
+          = f.label :received_on_gteq
+          = f.text_field :received_on_gteq, class: 'form-control datepicker input-xs'
+        .col-sm-3.form-group
+          = f.label :received_on_lteq
+          = f.text_field :received_on_lteq, class: 'form-control datepicker input-xs'
+      = f.submit I18n.t('filter'), class: 'btn bg-color-magenta txt-color-white btn-xs'
+      = link_to I18n.t('clear'), rentals_path, class: 'btn btn-xs btn-danger'

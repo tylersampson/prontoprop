@@ -1,0 +1,28 @@
+header
+  = t('.title')
+
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| 
+  fieldset
+    = devise_error_messages!
+    section
+      = f.label :email, class: 'label'
+      label.input
+        = icon 'user icon-append'
+        = f.email_field :email, autofocus: true
+    section
+      = f.label :password, class: 'label'
+      label.input
+        = icon 'lock icon-append'
+        = f.password_field :password, autocomplete: 'off'
+  
+    - if devise_mapping.rememberable?
+      section
+        label.checkbox
+          = f.check_box :remember_me
+          i
+          = t('.remember_me')
+  
+    = render 'devise/shared/links'
+
+  footer
+    = f.submit t('.submit'), class: 'btn btn-primary'

@@ -1,0 +1,36 @@
+= content_for :title, Status.model_name.human(count: 10)
+= content_for :actions do
+  = link_to(icon('plus', I18n.t('create')), new_status_path, class: 'btn btn-ribbon btn-success') if policy(Status).create?
+#widget-grid
+  #widget-table.jarviswidget data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+    header
+      span.widget-icon = icon('table')
+      h2 = Status.model_name.human(count: 10)
+      .widget-toolbar
+        = paginate @statuses
+      .widget-toolbar
+        = pager_per_select
+      .widget-toolbar
+        = page_entries_info @statuses
+      .jarviswidget-ctrls
+        a.button-icon class=('txt-color-red' if params[:q].present?) href="javascript:;" data-toggle="collapse" data-target="#filters" = icon('search')
+    div
+      .widget-body.no-padding
+        == render 'search'
+        .table-responsive
+          table.table.table-striped.table-hover.table-condensed
+            thead
+              tr
+                th = Status.human_attribute_name(:name)
+                th = Status.human_attribute_name(:nature)
+                th = Status.human_attribute_name(:can_edit)
+                th
+            tbody
+              - @statuses.each do |status|
+                tr
+                  td = link_to status.name, status
+                  td = status.nature
+                  td = status.can_edit
+                  td
+                    = link_to(I18n.t('edit'), edit_status_path(status), class: 'btn btn-primary') if policy(status).update?
+                    = link_to(I18n.t('delete'), status_path(status), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if policy(status).destroy?

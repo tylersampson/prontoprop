@@ -1,0 +1,12 @@
+.row
+  .col-sm-4.col-sm-offset-4
+    = bootstrap_form_for @agent do |f|
+      = f.text_field :first_name
+      = f.text_field :last_name
+      = f.text_field :employee_number
+      = f.text_field :mobile
+      = f.text_field :email
+      = f.number_field :tax_percent
+      = f.submit I18n.t('save'), class: 'btn btn-primary'
+      - if @agent.new_record?
+        = f.submit I18n.t('save_and_new'), name: 'save_and_new', class: 'btn btn-info'

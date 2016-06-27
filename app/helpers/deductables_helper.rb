@@ -1,0 +1,2 @@
+module DeductablesHelper
+end

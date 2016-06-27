@@ -1,0 +1,29 @@
+// Add anything custom here -- mixins, variable overrides.
+// by adding things here instead of overriding existing .LESS files, it makes merging changes on product updates easier
+
+table {
+  .btn { @extend .btn-xs; }
+  tr > td:last-child { text-align: right; }
+}
+
+.btn + .btn {
+  margin: 0 5px;
+}
+
+input + input {
+  margin: 0 5px;
+}
+
+flash-message {
+  display: none;
+}
+
+label.required:after {
+  content: "*";
+  color: red;
+  margin: 2px 0 0 5px;
+}
+
+label.control-label {
+  cursor: pointer;
+}

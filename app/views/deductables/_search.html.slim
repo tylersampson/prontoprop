@@ -1,0 +1,12 @@
+#filters.collapse 
+  .padding-10
+    = search_form_for @q do |f|
+      .row
+        .col-sm-3.form-group
+          = f.label :name_eq
+          = f.text_field :name_eq, class: 'form-control input-xs'
+        .col-sm-3.form-group
+          = f.label :default_cost_eq
+          = f.text_field :default_cost_eq, class: 'form-control input-xs'
+      = f.submit I18n.t('filter'), class: 'btn bg-color-magenta txt-color-white btn-xs'
+      = link_to I18n.t('clear'), deductables_path, class: 'btn btn-xs btn-danger'

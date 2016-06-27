@@ -1,0 +1,5 @@
+#ribbon
+  ol.breadcrumb
+    = render_breadcrumbs :tag => :li, :separator => ""
+  span.ribbon-button-alignment.pull-right
+    == yield :actions

@@ -1,0 +1,9 @@
+= bootstrap_form_for @rental do |f|
+  = f.date_select :received_on
+  = f.text_field :amount_received
+  = f.text_field :commission_amount
+  = f.text_field :tax_amount
+  = f.text_field :fees_amount
+  = f.submit I18n.t('save'), class: 'btn btn-primary'
+  - if @rental.new_record?
+    = f.submit I18n.t('save_and_new'), name: 'save_and_new', class: 'btn btn-info'

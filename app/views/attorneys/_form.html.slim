@@ -1,0 +1,8 @@
+= bootstrap_form_for @attorney do |f|
+  = f.text_field :name
+  = f.text_field :telephone
+  = f.text_field :email
+  = f.check_box :preferred
+  = f.submit I18n.t('save'), class: 'btn btn-primary'
+  - if @attorney.new_record?
+    = f.submit I18n.t('save_and_new'), name: 'save_and_new', class: 'btn btn-info'

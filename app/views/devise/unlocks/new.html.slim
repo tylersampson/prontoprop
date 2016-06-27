@@ -1,0 +1,16 @@
+header
+  = t('.title')
+
+= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+  fieldset
+    = devise_error_messages!
+    section
+      = f.label :email, class: 'label'
+      label.input
+        = icon('user icon-append')
+        = f.email_field :email, autofocus: true
+    = render 'devise/shared/links'
+
+  footer
+    = f.submit t('.submit'), class: 'btn btn-primary'
+

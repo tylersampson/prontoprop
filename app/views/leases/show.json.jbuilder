@@ -1,0 +1,1 @@
+json.extract! @lease, :id, :reference, :payprop_reference, :rent_amount, :managed, :start_on, :end_on, :deposit_amount, :deposit_held_by, :lessor_id, :lessee_id, :lease_fee, :inspection_fee, :credit_check_fee, :credit_check_on, :deposit_released_on, :deposit_released_to, :created_at, :updated_at

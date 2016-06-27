@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    title == yield :title
+    meta name="description" content=""
+    meta name="author" content=""
+
+    meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+
+    == csrf_meta_tags
+    link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700"
+    == stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    == javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body.paceable.smart-style-0.fixed-header.fixed-navigation.fixed-ribbon
+    
+    == render 'layouts/shared/header'
+    == render 'layouts/shared/sidebar'
+
+    #main role="main"
+      == render 'layouts/shared/ribbon'
+
+      #content
+        == yield
+
+        == yield :modals
+    == flash_messages 

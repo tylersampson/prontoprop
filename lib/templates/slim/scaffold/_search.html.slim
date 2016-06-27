@@ -1,0 +1,11 @@
+#filters.collapse 
+  .padding-10
+    = search_form_for @q do |f|
+      .row
+<% attributes.each do |attribute| -%>
+        .col-sm-3.form-group
+          = f.label :<%= attribute.name %>_eq
+          = f.<%= attribute.field_type %> :<%= attribute.name %>_eq, class: 'form-control input-xs'
+<% end -%>
+      = f.submit I18n.t('filter'), class: 'btn bg-color-magenta txt-color-white btn-xs'
+      = link_to I18n.t('clear'), <%= plural_table_name %>_path, class: 'btn btn-xs btn-danger'

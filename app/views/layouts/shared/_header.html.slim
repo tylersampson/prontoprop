@@ -1,0 +1,29 @@
+header#header
+  #logo-group
+    span#logo
+      = image_tag 'logo.png', alt: 'Admin'
+
+  #hide-menu.btn-header.pull-left
+    span
+      a href="javascript:;" data-action="toggleMenu" title="Collapse Menu"
+        = icon('reorder')
+
+  .project-context.hidden-xs
+    span.label Projects:
+    span.project-selector.dropdown-toggle data-toggle="dropdown" Recent Projects #{icon('angle-down')}
+    ul.dropdown-menu
+      li = link_to 'Some project', 'javascript:;'
+  
+  .pull-right
+    #logout.btn-header.transparent.pull-right
+      span
+        = link_to icon('sign-out'), destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' }
+
+    form.header-search.pull-right
+      input#search-fld type="text" name="param" placeholder="Quick Search"
+      button type="submit" = icon('search')
+
+    #fullscreen.btn-header.transparent.pull-right
+      span
+        a href="javascript:;" data-action="launchFullscreen" title="Full Screen" = icon('arrows-alt')
+

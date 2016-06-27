@@ -1,0 +1,35 @@
+= bootstrap_form_for @lease do |f|
+  #widget-grid
+    .row
+      .col-sm-3
+        = widget Lease.model_name.human do
+          = f.text_field :reference
+          = f.text_field :payprop_reference
+          = f.text_field :rent_amount
+          = f.collection_select :agent_id, Agent.all, :id, :full_name, { include_blank: true }
+          = f.text_field :deposit_amount
+          = f.select :deposit_held_by, %w{Trust Owner Other}, include_blank: true
+          = f.check_box :managed
+          = f.text_field :start_on, append: icon('calendar'), class: 'datepicker', 'data-dateformat': 'dd/mm/yy'
+          = f.text_field :end_on, append: icon('calendar'), class: 'datepicker', 'data-dateformat': 'dd/mm/yy'
+      .col-sm-3
+        = f.fields_for :address do |builder|
+          = render 'address_fields', f: builder, title: Address.model_name.human
+      .col-sm-3
+        = f.fields_for :lessor do |builder|
+          = render 'contact_fields', f: builder, title: Lease.human_attribute_name(:lessor)
+
+        = f.fields_for :lessee do |builder|
+          = render 'contact_fields', f: builder, title: Lease.human_attribute_name(:lessee)
+      .col-sm-3
+        = widget Lease.model_name.human do
+          = f.text_field :lease_fee
+          = f.text_field :inspection_fee
+          = f.text_field :credit_check_fee
+          = f.text_field :credit_check_on, append: icon('calendar'), class: 'datepicker', 'data-dateformat': 'dd/mm/yy'
+          = f.text_field :deposit_released_on, append: icon('calendar'), class: 'datepicker', 'data-dateformat': 'dd/mm/yy'
+          = f.text_field :deposit_released_to
+        .text-right
+          = f.submit I18n.t('save'), class: 'btn btn-primary'
+          - if @lease.new_record?
+            = f.submit I18n.t('save_and_new'), name: 'save_and_new', class: 'btn btn-info'

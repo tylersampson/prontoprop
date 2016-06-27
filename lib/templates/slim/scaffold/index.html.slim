@@ -1,0 +1,40 @@
+= content_for :title, <%= class_name %>.model_name.human(count: 10)
+= content_for :actions do
+  = link_to(icon('plus', I18n.t('create')), new_<%= singular_table_name %>_path, class: 'btn btn-ribbon btn-success') if policy(<%= class_name %>).create?
+#widget-grid
+  #widget-table.jarviswidget data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+    header
+      span.widget-icon = icon('table')
+      h2 = <%= class_name %>.model_name.human(count: 10)
+      .widget-toolbar
+        = paginate @<%= plural_table_name %>
+      .widget-toolbar
+        = pager_per_select
+      .widget-toolbar
+        = page_entries_info @<%= plural_table_name %>
+      .jarviswidget-ctrls
+        a.button-icon class=('txt-color-red' if params[:q].present?) href="javascript:;" data-toggle="collapse" data-target="#filters" = icon('search')
+    div
+      .widget-body.no-padding
+        == render 'search'
+        .table-responsive
+          table.table.table-striped.table-hover.table-condensed
+            thead
+              tr
+<% attributes.each do |attribute| -%>
+                th = <%= class_name %>.human_attribute_name(:<%= attribute.name %>)
+<% end -%>
+                th
+            tbody
+              - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+                tr
+<% attributes.each_with_index do |attribute, i| -%>
+<%- if i == 0 -%>
+                  td = link_to <%= singular_table_name %>.<%= attribute.name %>, <%= singular_table_name %>
+<%- else -%>
+                  td = <%= singular_table_name %>.<%= attribute.name %>
+<%- end -%>
+<% end -%>
+                  td
+                    = link_to(I18n.t('edit'), edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-primary') if policy(<%= singular_table_name %>).update?
+                    = link_to(I18n.t('delete'), <%= singular_table_name %>_path(<%= singular_table_name %>), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if policy(<%= singular_table_name %>).destroy?

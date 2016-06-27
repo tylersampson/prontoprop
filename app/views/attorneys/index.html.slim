@@ -1,0 +1,38 @@
+= content_for :title, Attorney.model_name.human(count: 10)
+= content_for :actions do
+  = link_to(icon('plus', I18n.t('create')), new_attorney_path, class: 'btn btn-ribbon btn-success') if policy(Attorney).create?
+#widget-grid
+  #widget-table.jarviswidget data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+    header
+      span.widget-icon = icon('table')
+      h2 = Attorney.model_name.human(count: 10)
+      .widget-toolbar
+        = paginate @attorneys
+      .widget-toolbar
+        = pager_per_select
+      .widget-toolbar
+        = page_entries_info @attorneys
+      .jarviswidget-ctrls
+        a.button-icon class=('txt-color-red' if params[:q].present?) href="javascript:;" data-toggle="collapse" data-target="#filters" = icon('search')
+    div
+      .widget-body.no-padding
+        == render 'search'
+        .table-responsive
+          table.table.table-striped.table-hover.table-condensed
+            thead
+              tr
+                th = Attorney.human_attribute_name(:name)
+                th = Attorney.human_attribute_name(:telephone)
+                th = Attorney.human_attribute_name(:email)
+                th = Attorney.human_attribute_name(:preferred)
+                th
+            tbody
+              - @attorneys.each do |attorney|
+                tr
+                  td = link_to attorney.name, attorney
+                  td = attorney.telephone
+                  td = attorney.email
+                  td = attorney.preferred
+                  td
+                    = link_to(I18n.t('edit'), edit_attorney_path(attorney), class: 'btn btn-primary') if policy(attorney).update?
+                    = link_to(I18n.t('delete'), attorney_path(attorney), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if policy(attorney).destroy?

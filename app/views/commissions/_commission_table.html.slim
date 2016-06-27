@@ -1,0 +1,16 @@
+table.table.table-bordered.table-hover
+  thead
+    tr
+      th Agent
+      th.text-right Gross
+      th.text-right Tax
+      th.text-right Deductions
+      th.text-right Nett Due
+  tbody
+    - commissions.each do |c|
+      tr
+        td = c.agent.full_name
+        td.text-right = c.commission_amount
+        td.text-right = c.tax_amount
+        td.text-right = c.total_deductions
+        td.text-right = c.nett_due

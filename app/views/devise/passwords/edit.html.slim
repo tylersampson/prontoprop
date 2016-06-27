@@ -1,0 +1,22 @@
+header
+  = t('.title')
+
+= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+  = f.hidden_field :reset_password_token
+  fieldset
+    = devise_error_messages!
+    section
+      = f.label :password, t('.new_password'), class: 'label'
+      label.input
+        = icon 'lock icon-append'
+        = f.password_field :password, autofocus: true, autocomplete: "off"
+    section
+      = f.label :password_confirmation, t('.confirm_new_password'), class: 'label'
+      label.input
+        = icon 'lock icon-append'
+        = f.password_field :password_confirmation, autocomplete: "off"
+
+    = render 'devise/shared/links'
+
+  footer
+    = f.submit t('.submit'), class: 'btn btn-primary'

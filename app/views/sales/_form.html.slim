@@ -1,0 +1,44 @@
+= bootstrap_form_for @sale do |f|
+  .row
+    .col-sm-3
+      = widget Sale.model_name.human, 'money' do
+        = f.text_field :reference
+        = f.text_field :contract_start_on, append: icon('calendar'), class: 'datepicker', 'data-dateformat': 'yy-mm-dd'
+        = f.text_field :purchase_price
+        = f.text_field :deposit_amount
+        = f.text_field :deposit_due_on, append: icon('calendar'), class: 'datepicker', 'data-dateformat': 'yy-mm-dd'
+        = f.collection_select :status_id, Status.all, :id, :name
+      = f.fields_for :seller do |builder|
+        = render 'contact_fields', title: Sale.human_attribute_name(:seller), f: builder
+    .col-sm-3
+      = f.fields_for :address do |builder|
+        = render 'address_fields', title: Address.model_name.human, f: builder
+      = f.fields_for :buyer do |builder|
+        = render 'contact_fields', title: Sale.human_attribute_name(:buyer), f: builder
+    .col-sm-3
+      = widget Sale.model_name.human, 'money' do
+        = f.collection_select :attorney_id, Attorney.all, :id, :name
+        = f.collection_select :bond_attorney_id, Attorney.all, :id, :name
+        = f.text_field :bond_due_on, append: icon('calendar'), class: 'datepicker', 'data-dateformat': 'yy-mm-dd'
+        = f.collection_select :originator_id, Originator.all, :id, :name
+        = f.text_field :registered_on, append: icon('calendar'), class: 'datepicker', 'data-dateformat': 'yy-mm-dd'
+        = f.collection_select :bank_id, Bank.all, :id, :name
+        = f.text_field :grant_amount
+    .col-sm-3
+      = widget Sale.model_name.human, 'money' do
+        = f.text_field :commission_amount
+        = f.text_field :tax_amount, readonly: true
+
+        .form-group
+          label = Commission.human_attribute_name :nett_commission_amount
+          = text_field_tag :sale_nett_amount, nil, readonly: true, class: 'form-control'
+        .text-right
+          = link_to_add_fields t('.add_fields'), f, :commissions
+
+      = f.fields_for :commissions do |builder|
+        = render 'commission_fields', f: builder, title: Sale.human_attribute_name(:commissions)
+      
+      
+      = f.submit I18n.t('save'), class: 'btn btn-primary'
+      - if @sale.new_record?
+        = f.submit I18n.t('save_and_new'), name: 'save_and_new', class: 'btn btn-info'

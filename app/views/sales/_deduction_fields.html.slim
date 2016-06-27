@@ -1,0 +1,8 @@
+.jarviswidget
+  div
+    .widget-body
+      = f.collection_select :deductable_id, Deductable.all, :id, :name, { include_blank: true }, data: { behavior: 'deductable_id' }
+      = f.text_field :name, data: { behavior: 'name' }
+      = f.text_field :total_amount, data: { behavior: 'total_cost' }
+      = f.hidden_field :_destroy
+      = link_to t('remove'), '#', class: 'btn btn-danger', data: { behavior: 'remove_fields' }

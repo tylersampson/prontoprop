@@ -1,0 +1,3 @@
+- content_for :subject, t('.subject')
+= t('.greeting_html', addressee: @resource.email)
+= t('.message_html', link: link_to('Unlock my account', unlock_url(@resource, unlock_token: @token)))

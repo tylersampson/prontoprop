@@ -1,0 +1,23 @@
+- content_for :title, I18n.t('showing', entity: Agent.model_name.human(count: 10))
+- content_for :actions do
+  = link_to I18n.t('edit'), edit_agent_path(@agent), class: 'btn btn-ribbon btn-primary'
+
+p
+  strong First name:
+  = @agent.first_name
+p
+  strong Last name:
+  = @agent.last_name
+p
+  strong Employee number:
+  = @agent.employee_number
+p
+  strong Mobile:
+  = @agent.mobile
+p
+  strong Email:
+  = @agent.email
+p
+  strong Tax percent:
+  = @agent.tax_percent
+

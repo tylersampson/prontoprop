@@ -1,0 +1,44 @@
+= content_for :title, Sale.model_name.human(count: 10)
+= content_for :actions do
+  = link_to(icon('plus', I18n.t('create')), new_sale_path, class: 'btn btn-ribbon btn-success') if policy(Sale).create?
+#widget-grid
+  #widget-table.jarviswidget data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+    header
+      span.widget-icon = icon('table')
+      h2 = Sale.model_name.human(count: 10)
+      .widget-toolbar
+        = paginate @sales
+      .widget-toolbar
+        = pager_per_select
+      .widget-toolbar
+        = page_entries_info @sales
+      .jarviswidget-ctrls
+        a.button-icon class=('txt-color-red' if params[:q].present?) href="javascript:;" data-toggle="collapse" data-target="#filters" = icon('search')
+    div
+      .widget-body.no-padding
+        == render 'search'
+        .table-responsive
+          table.table.table-striped.table-hover.table-condensed
+            thead
+              tr
+                th = Sale.human_attribute_name(:reference)
+                th = Sale.human_attribute_name(:contract_start_on)
+                th = Sale.human_attribute_name(:purchase_price)
+                th = Sale.human_attribute_name(:originator)
+                th = Sale.human_attribute_name(:status)
+                th = Sale.human_attribute_name(:registered_on)
+                th = Sale.human_attribute_name(:commission_amount)
+                th
+            tbody
+              - @sales.each do |sale|
+                tr
+                  td = link_to sale.reference, sale
+                  td = sale.contract_start_on
+                  td = sale.purchase_price
+                  td = sale.originator.name
+                  td = sale.status.name
+                  td = sale.registered_on
+                  td = sale.commission_amount
+                  td
+                    = link_to(I18n.t('edit'), edit_sale_path(sale), class: 'btn btn-primary') if policy(sale).update?
+                    = link_to(I18n.t('delete'), sale_path(sale), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if policy(sale).destroy?

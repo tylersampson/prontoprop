@@ -1,0 +1,15 @@
+= widget title, 'money', data: { behavior: 'commission' } do
+  = f.collection_select :agent_id, Agent.all, :id, :full_name, { include_blank: true }, data: { behavior: 'agent_id'}
+  = f.text_field :agent_percent, 'data-behavior': :agent_percent
+  = f.text_field :commission_amount, readonly: true, 'data-behavior': :agent_comm_gross
+  = f.text_field :tax_percent, readonly: true, 'data-behavior': :agent_tax_percent 
+  = f.text_field :tax_amount, readonly: true, 'data-behavior': :agent_tax_amount
+  .form-group
+    label = Commission.human_attribute_name :nett_commission_amount
+    = text_field_tag :nett_commission_amount, nil, readonly: true, class: 'form-control', data: { behavior: 'agent_nett_comm' }
+
+  = f.fields_for :deductions do |builder|
+    = render 'deduction_fields', f: builder
+  = link_to_add_fields t('.add_fields'), f, :deductions 
+  = f.hidden_field :_destroy
+  = link_to t('remove'), '#', class: 'btn btn-danger', data: { behavior: 'remove_fields' }

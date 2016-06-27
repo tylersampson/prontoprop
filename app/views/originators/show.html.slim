@@ -1,0 +1,17 @@
+- content_for :title, I18n.t('showing', entity: Originator.model_name.human(count: 10))
+- content_for :actions do
+  = link_to I18n.t('edit'), edit_originator_path(@originator), class: 'btn btn-ribbon btn-primary'
+
+p
+  strong Name:
+  = @originator.name
+p
+  strong Telephone:
+  = @originator.telephone
+p
+  strong Email:
+  = @originator.email
+p
+  strong Preferred:
+  = @originator.preferred
+

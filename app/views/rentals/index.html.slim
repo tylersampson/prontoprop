@@ -1,0 +1,61 @@
+= content_for :title, Rental.model_name.human(count: 10)
+= content_for :actions do
+  = link_to(icon('plus', I18n.t('create')), new_rental_path, class: 'btn btn-ribbon btn-success') if policy(Rental).create?
+  = link_to(icon('file', I18n.t('import')), '#', class: 'btn btn-ribbon btn-success', data: { toggle: 'modal', target: '#import_modal'})
+- content_for :modals do
+  #import_modal.modal.fade
+    .modal-dialog
+      = bootstrap_form_tag url: import_rentals_path, multipart: true do |f|
+        .modal-content
+          .modal-header
+            button.close type="button" data-dismiss="modal" = icon('tick')
+            h4.modal-title Import Rentals
+          .modal-body
+            p Choose the CSV file you wish to import below.
+            = f.file_field :file, hide_label: true
+          .modal-footer
+            = f.submit "Import", class: 'btn btn-success' 
+#widget-grid
+  #widget-table.jarviswidget data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+    header
+      span.widget-icon = icon('table')
+      h2 = Rental.model_name.human(count: 10)
+      .widget-toolbar
+        = paginate @rentals
+      .widget-toolbar
+        = pager_per_select
+      .widget-toolbar
+        = page_entries_info @rentals
+      .jarviswidget-ctrls
+        a.button-icon class=('txt-color-red' if params[:q].present?) href="javascript:;" data-toggle="collapse" data-target="#filters" = icon('search')
+    div
+      .widget-body.no-padding
+        == render 'search'
+        .table-responsive
+          table.table.table-striped.table-hover.table-condensed
+            thead
+              tr
+                th = Rental.human_attribute_name(:lease)
+                th = Rental.human_attribute_name(:import_id)
+                th = Rental.human_attribute_name(:received_on)
+                th = Rental.human_attribute_name(:amount_received)
+                th = Rental.human_attribute_name(:commission_amount)
+                th = Rental.human_attribute_name(:tax_amount)
+                th = Rental.human_attribute_name(:fees_amount)
+                th
+            tbody
+              - @rentals.each do |rental|
+                tr
+                  td = link_to rental.lease.reference, rental
+                  td = rental.import_id
+                  td = rental.received_on
+                  td = rental.amount_received
+                  td = rental.commission_amount
+                  td = rental.tax_amount
+                  td = rental.fees_amount
+                  td
+                    = link_to(I18n.t('edit'), edit_rental_path(rental), class: 'btn btn-primary') if policy(rental).update?
+                    = link_to(I18n.t('delete'), rental_path(rental), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if policy(rental).destroy?
+
+
+

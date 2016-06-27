@@ -1,0 +1,15 @@
+#filters.collapse 
+  .padding-10
+    = search_form_for @q do |f|
+      .row
+        .col-sm-3.form-group
+          = f.label :name_eq
+          = f.text_field :name_eq, class: 'form-control input-xs'
+        .col-sm-3.form-group
+          = f.label :nature_eq
+          = f.text_field :nature_eq, class: 'form-control input-xs'
+        .col-sm-3.form-group
+          = f.label :can_edit_eq
+          = f.check_box :can_edit_eq, class: 'form-control input-xs'
+      = f.submit I18n.t('filter'), class: 'btn bg-color-magenta txt-color-white btn-xs'
+      = link_to I18n.t('clear'), statuses_path, class: 'btn btn-xs btn-danger'

@@ -1,0 +1,12 @@
+#filters.collapse 
+  .padding-10
+    = search_form_for @q do |f|
+      .row
+        .col-sm-3.form-group
+          = f.label :reference_eq
+          = f.text_field :reference_eq, class: 'form-control input-xs'
+        .col-sm-3.form-group
+          = f.label :status_id_eq
+          = f.collection_select :status_id_eq, Status.all, :id, :name, { include_blank: true }, class: 'form-control input-xs'
+      = f.submit I18n.t('filter'), class: 'btn bg-color-magenta txt-color-white btn-xs'
+      = link_to I18n.t('clear'), sales_path, class: 'btn btn-xs btn-danger'
