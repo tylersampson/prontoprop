@@ -49,10 +49,9 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv', github: "capistrano/rbenv"
-  gem 'capistrano-unicorn-nginx'
+  gem 'capistrano-bower'
 end
 
 group :production do
-  gem 'unicorn'
 end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

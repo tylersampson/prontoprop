@@ -1,8 +1,15 @@
 # config valid only for current version of Capistrano
 lock '3.5.0'
+set :application, 'prontoprop'
+set :repo_url, 'https://github.com/tylersampson/prontoprop.git'
 
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :rbenv_type, :user # or :system, depends on your rbenv setup
+set :rbenv_ruby, '2.3.1'
+
+set :deploy_to, '/home/aviseo/prontoprop'
+
+set :linked_files, %w{config/database.yml config/secrets.yml}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -34,8 +41,18 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-
 namespace :deploy do
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      within release_path do
+        execute :bundle, :exec, :pumactl, :restart
+      end
+    end
+  end
+
+  after :publishing, :restart
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
