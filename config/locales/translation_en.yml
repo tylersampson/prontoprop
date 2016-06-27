@@ -1,0 +1,180 @@
+en:
+  activerecord:
+    models:
+      address:
+        one: Address  #g
+        other: Addresses
+      agent: 
+        one: Agent  #g
+        other: Agents
+      attorney: 
+        one: Attorney  #g
+        other: Attorneys
+      bank: 
+        one: Bank  #g
+        other: Banks
+      commission: 
+        one: Commission  #g
+        other: Commissions
+      contact: 
+        one: Contact  #g
+        other: Contacts
+      deductable: 
+        one: Deductable  #g
+        other: Deductables
+      deduction: 
+        one: Deduction  #g
+        other: Deductions
+      lease: 
+        one: Lease  #g
+        other: Leases
+      originator: 
+        one: Originator  #g
+        other: Originators
+      rental: 
+        one: Rental  #g
+        other: Rentals
+      sale: 
+        one: Sale  #g
+        other: Sales
+      status: 
+        one: Status  #g
+        other: Statuses
+      user: 
+        one: User  #g
+        other: Users
+
+    attributes:
+      address:
+        addressable: :activerecord.models.addressable  #g
+        addressable_type: Addressable type  #g
+        city: City  #g
+        complex: Complex  #g
+        erf: Erf  #g
+        post_code: Post code  #g
+        street_name: Street name  #g
+        street_number: Street no  #g
+        suburb: Suburb  #g
+        unit: Unit  #g
+
+      agent:
+        email: Email  #g
+        employee_number: Employee number  #g
+        first_name: First name  #g
+        last_name: Last name  #g
+        mobile: Mobile  #g
+        tax_percent: Tax percent  #g
+
+      attorney:
+        email: Email  #g
+        name: Name  #g
+        preferred: Preferred  #g
+        telephone: Telephone  #g
+
+      bank:
+        name: Name  #g
+
+      commission:
+        agent: :activerecord.models.agent  #g
+        agent_percent: Agent percent  #g
+        commission_amount: Commission amount  #g
+        commissionable: :activerecord.models.commissionable  #g
+        commissionable_type: Commissionable type  #g
+        deductions: Deductions  #g
+        tax_amount: Tax amount  #g
+        tax_percent: Tax percent  #g
+
+      contact:
+        email: Email  #g
+        first_name: First name  #g
+        last_name: Last name  #g
+        mobile: Mobile  #g
+
+      deductable:
+        default_cost: Default cost  #g
+        name: Name  #g
+
+      deduction:
+        commission: :activerecord.models.commission  #g
+        deductable: :activerecord.models.deductable  #g
+        name: Name  #g
+        total_amount: Total amount  #g
+
+      lease:
+        address: :activerecord.models.address  #g
+        agent: :activerecord.models.agent  #g
+        credit_check_fee: Credit check fee  #g
+        credit_check_on: Credit check on  #g
+        deposit_amount: Deposit amount  #g
+        deposit_held_by: Deposit held by  #g
+        deposit_released_on: Deposit released on  #g
+        deposit_released_to: Deposit released to  #g
+        end_on: End on  #g
+        inspection_fee: Inspection fee  #g
+        lease_fee: Lease fee  #g
+        lessee: :activerecord.models.lessee  #g
+        lessor: :activerecord.models.lessor  #g
+        managed: Managed  #g
+        payprop_reference: Payprop reference  #g
+        reference: Reference  #g
+        rent_amount: Rent amount  #g
+        start_on: Start on  #g
+
+      originator:
+        email: Email  #g
+        name: Name  #g
+        preferred: Preferred  #g
+        telephone: Telephone  #g
+
+      rental:
+        amount_received: Amount received  #g
+        commission_amount: Commission amount  #g
+        commissions: Commissions  #g
+        fees_amount: Fees amount  #g
+        lease: :activerecord.models.lease  #g
+        received_on: Received on  #g
+        tax_amount: Tax amount  #g
+
+      sale:
+        address: :activerecord.models.address  #g
+        attorney: :activerecord.models.attorney  #g
+        bank: :activerecord.models.bank  #g
+        bond_attorney: :activerecord.models.bond_attorney  #g
+        bond_due_on: Bond due on  #g
+        buyer: :activerecord.models.buyer  #g
+        commission_amount: Commission amount  #g
+        commissions: Commissions  #g
+        contract_start_on: Contract start on  #g
+        deposit_amount: Deposit amount  #g
+        deposit_due_on: Deposit due on  #g
+        grant_amount: Grant amount  #g
+        originator: :activerecord.models.originator  #g
+        purchase_price: Purchase price  #g
+        reference: Reference  #g
+        registered_on: Registered on  #g
+        seller: :activerecord.models.seller  #g
+        status: :activerecord.models.status  #g
+        tax_amount: Tax amount  #g
+
+      status:
+        can_edit: Can edit  #g
+        name: Name  #g
+        nature: Nature  #g
+
+      user:
+        confirmation_sent_at: Confirmation sent at  #g
+        confirmation_token: Confirmation token  #g
+        confirmed_at: Confirmed at  #g
+        current_sign_in_at: Current sign in at  #g
+        current_sign_in_ip: Current sign in ip  #g
+        email: Email  #g
+        encrypted_password: Encrypted password  #g
+        failed_attempts: Failed attempts  #g
+        last_sign_in_at: Last sign in at  #g
+        last_sign_in_ip: Last sign in ip  #g
+        locked_at: Locked at  #g
+        remember_created_at: Remember created at  #g
+        reset_password_sent_at: Reset password sent at  #g
+        reset_password_token: Reset password token  #g
+        unconfirmed_email: Unconfirmed email  #g
+        unlock_token: Unlock token  #g

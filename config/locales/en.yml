@@ -30,7 +30,17 @@ en:
   delete: "Delete"
   create: "Create New"
   showing: "Showing %{entity}"
+  import: "Import"
+  remove: "Remove"
+  filter: "Filter"
+  clear: "Clear"
 
   notices:
     created: "Successfully created %{entity} (ID#%{id})"
     updated: "Successfully updated %{entity} - %{title}"
+
+  sales:
+    form:
+      add_fields: "Add Commission"
+    commission_fields:
+      add_fields: "Add Deduction"

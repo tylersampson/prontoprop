@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   resources :banks
   resources :originators
   resources :attorneys
-  resources :agents
+  resources :agents do
+    collection do
+      post 'import'
+    end
+  end
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }

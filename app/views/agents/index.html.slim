@@ -1,6 +1,20 @@
 = content_for :title, Agent.model_name.human(count: 10)
 = content_for :actions do
   = link_to(icon('plus', I18n.t('create')), new_agent_path, class: 'btn btn-ribbon btn-success') if policy(Agent).create?
+  = link_to(icon('file', I18n.t('import')), '#', class: 'btn btn-ribbon btn-success', data: { toggle: 'modal', target: '#import_modal'})
+- content_for :modals do
+  #import_modal.modal.fade
+    .modal-dialog
+      = bootstrap_form_tag url: import_agents_path, multipart: true do |f|
+        .modal-content
+          .modal-header
+            button.close type="button" data-dismiss="modal" = icon('tick')
+            h4.modal-title Import
+          .modal-body
+            p Choose the CSV file you wish to import below.
+            = f.file_field :file, hide_label: true
+          .modal-footer
+            = f.submit "Import", class: 'btn btn-success' 
 #widget-grid
   #widget-table.jarviswidget data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
     header

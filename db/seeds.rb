@@ -6,6 +6,22 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-admin = User.new(email: 'tyler_sampson@tresblue.com', password: 'admin1234')
-admin.skip_confirmation!
-admin.save
+admin = User.where(id: 1)
+if admin.present?
+  admin.email = 'tyler_sampson@tresblue.com'
+  admin.password = 'admin1234')
+  admin.skip_confirmation!
+  admin.save
+end
+
+if Bank.count == 0
+  %w{ABSA Standard Nedbank FNB}.each do |bank|
+    Bank.create name: bank
+  end
+end
+
+if Status.count == 0
+  Status.create name: 'Listing', nature: 'preparation', can_edit: true
+  Status.create name: 'Registered', nature: 'closed', can_edit: false
+  Status.create name: 'Cancelled', nature: 'closed', can_edit: false
+end

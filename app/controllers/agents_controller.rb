@@ -9,6 +9,15 @@ class AgentsController < ApplicationController
     add_breadcrumb I18n.t('listing', entity: Agent.model_name.human(count: 10))
     @q = policy_scope(Agent).ransack(params[:q])
     @agents = @q.result.page(params[:page]).per(session[:default_per])
+    respond_to do |format|
+      format.html
+      format.csv { send_data @agents.to_csv }
+    end
+  end
+
+  def import
+    total = Agent.import(params[:file])
+    redirect_to agents_path, notice: "#{total} agents imported!"
   end
 
   # GET /agents/1
