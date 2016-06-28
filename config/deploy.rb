@@ -8,7 +8,7 @@ set :rbenv_ruby, '2.3.1'
 
 set :deploy_to, '/home/aviseo/prontoprop'
 
-set :linked_files, %w{config/database.yml config/secrets.yml}
+set :linked_files, %w{config/database.yml config/secrets.yml config/puma.rb}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default branch is :master
