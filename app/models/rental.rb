@@ -32,8 +32,8 @@ class Rental < ApplicationRecord
           rental.received_on = Date.strptime(row['ReconDate'], '%m/%d/%Y')
           rental.amount_received = row['PaidAmount'].to_f
           rental.commission_amount = row['AfterSplitAmount'].to_f
-          rental.tax_amount = rental.commission_amount * 0.14 
-          rental.fees_amount = rental.amount_received * 0.015
+          rental.tax_amount = rental.commission_amount - (rental.commission_amount / 1.14)
+          rental.fees_amount = lease.rent_amount * 0.0135
           rental.import_id = row['PaymentRecordID']
           rental.save!
           completed += 1
@@ -44,8 +44,8 @@ class Rental < ApplicationRecord
     [total, completed]
   end
 
-  def nett_commission
-    @nett_commission ||= commission_amount - tax_amount - fees_amount
+  def nett_commission_amount
+    @nett_commission_amount ||= commission_amount - tax_amount - fees_amount
   end
 
   protected
@@ -55,7 +55,7 @@ class Rental < ApplicationRecord
       self.commissions.build(
         agent_id: lease.agent_id,
         agent_percent: 50,
-        commission_amount: (nett_commission / 2)        
+        commission_amount: (nett_commission_amount / 2)        
       )
     end
 end

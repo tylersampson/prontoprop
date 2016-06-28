@@ -52,7 +52,7 @@ class Sale < ApplicationRecord
     presence: true
 
   before_save do
-    self.tax_amount = self.commission_amount * 0.14
+    self.tax_amount = self.commission_amount - (self.commission_amount / 1.14)
   end
 
   def nett_commission_amount

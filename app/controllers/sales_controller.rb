@@ -83,6 +83,6 @@ class SalesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sale_params
-      params.require(:sale).permit(:reference, :seller_id, :buyer_id, :contract_start_on, :purchase_price, :deposit_amount, :deposit_due_on, :attorney_id, :bond_attorney_id, :bond_due_on, :originator_id, :status_id, :registered_on, :bank_id, :grant_amount, :commission_amount, :address_attributes => [:id, :erf, :street_number, :street_name, :unit, :complex, :suburb, :city, :post_code], :commissions_attributes => [:id, :agent_id, :agent_percent, :_destroy, :deductions_attributes => [:id, :deductable_id, :name, :total_amount]])
+      params.require(:sale).permit(:reference, :seller_id, :buyer_id, :contract_start_on, :purchase_price, :deposit_amount, :deposit_due_on, :attorney_id, :bond_attorney_id, :bond_due_on, :originator_id, :status_id, :registered_on, :bank_id, :grant_amount, :commission_amount, :seller_attributes => [:id, :first_name, :last_name, :email, :mobile, :company], :buyer_attributes => [:id, :first_name, :last_name, :email, :mobile, :company], :address_attributes => [:id, :erf, :street_number, :street_name, :unit, :complex, :suburb, :city, :post_code], :commissions_attributes => [:id, :agent_id, :agent_percent, :_destroy, :deductions_attributes => [:id, :deductable_id, :name, :total_amount]])
     end
 end

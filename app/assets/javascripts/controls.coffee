@@ -15,7 +15,7 @@ ready = ->
 
 	calculateCommission = (event) ->
 		commAmt = parseFloat($("#sale_commission_amount").val())
-		vatAmt = (commAmt * 0.14).toFixed(2)
+		vatAmt = (commAmt - (commAmt / 1.14)).toFixed(2)
 		$('#sale_tax_amount').val vatAmt
 		nettComm = commAmt - vatAmt
 		$("#sale_nett_amount").val nettComm
