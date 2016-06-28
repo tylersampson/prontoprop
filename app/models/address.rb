@@ -20,13 +20,12 @@
 class Address < ApplicationRecord
   belongs_to :addressable, polymorphic: true
 
-  validates :street_number,
-    :street_name,
+  validates :street_name,
     :suburb,
     :city,
     :post_code,
     presence: true
 
-  validates :erf, presence: true, if: 'addressable.class == Sale'
+  validates :erf, :street_number, presence: true, if: 'addressable.class == Sale'
   validates :unit, :complex, presence: true, if: 'addressable.class == Lease'
 end
