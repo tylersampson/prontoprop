@@ -83,6 +83,6 @@ class LeasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lease_params
-      params.require(:lease).permit(:reference, :payprop_reference, :rent_amount, :managed, :start_on, :end_on, :deposit_amount, :deposit_held_by, :lessor_id, :lessee_id, :lease_fee, :inspection_fee, :credit_check_fee, :credit_check_on, :deposit_released_on, :deposit_released_to, :agent_id, :lessor_attributes => [:id, :first_name, :last_name, :email, :mobile], :lessee_attributes => [:id, :first_name, :last_name, :email, :mobile], :address_attributes => [:id, :erf, :street_number, :street_name, :unit, :complex, :suburb, :city, :post_code])
+      params.require(:lease).permit(:reference, :payprop_reference, :rent_amount, :managed, :start_on, :end_on, :deposit_amount, :deposit_held_by, :lessor_id, :lessee_id, :lease_fee, :inspection_fee, :credit_check_fee, :credit_check_on, :deposit_released_on, :deposit_released_to, :agent_id, :lessor_attributes => [:id, :first_name, :last_name, :email, :mobile, :company], :lessee_attributes => [:id, :first_name, :last_name, :email, :mobile, :company], :address_attributes => [:id, :erf, :street_number, :street_name, :unit, :complex, :suburb, :city, :post_code])
     end
 end
