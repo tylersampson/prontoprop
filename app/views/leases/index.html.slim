@@ -1,6 +1,21 @@
 = content_for :title, Lease.model_name.human(count: 10)
 = content_for :actions do
   = link_to(icon('plus', I18n.t('create')), new_lease_path, class: 'btn btn-ribbon btn-success') if policy(Lease).create?
+  = link_to(icon('file', I18n.t('import')), '#', class: 'btn btn-ribbon btn-success', data: { toggle: 'modal', target: '#import_modal'})
+  = link_to I18n.t('export'), leases_path(format: "csv")
+- content_for :modals do
+  #import_modal.modal.fade
+    .modal-dialog
+      = bootstrap_form_tag url: import_leases_path, multipart: true do |f|
+        .modal-content
+          .modal-header
+            button.close type="button" data-dismiss="modal" = icon('tick')
+            h4.modal-title Import Leases
+          .modal-body
+            p Choose the CSV file you wish to import below.
+            = f.file_field :file, hide_label: true
+          .modal-footer
+            = f.submit "Import", class: 'btn btn-success'
 #widget-grid
   #widget-table.jarviswidget data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
     header

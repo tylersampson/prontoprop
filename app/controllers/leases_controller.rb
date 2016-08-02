@@ -9,6 +9,15 @@ class LeasesController < ApplicationController
     add_breadcrumb I18n.t('listing', entity: Lease.model_name.human(count: 10))
     @q = policy_scope(Lease).ransack(params[:q])
     @leases = @q.result.page(params[:page]).per(session[:default_per])
+    respond_to do |format|
+      format.html
+      format.csv { send_data @q.result.to_csv }
+    end
+  end
+
+  def import
+    total,complete = Lease.import(params[:file])
+    redirect_to leases_path, notice: "#{complete}/#{total} imported"
   end
 
   # GET /leases/1

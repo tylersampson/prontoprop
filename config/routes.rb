@@ -4,7 +4,9 @@ Rails.application.routes.draw do
       post 'import'
     end
   end
-  resources :leases
+  resources :leases do
+    collection { post :import }
+  end
   resources :sales
   resources :statuses
   resources :deductables
