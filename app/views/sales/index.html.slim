@@ -38,18 +38,18 @@
                 th
             tbody
               - @sales.each do |sale|
-                tr
+                tr style="background-color:#{sale.status.color}"
                   td = link_to sale.reference, sale
                   td = sale.contract_start_on
                   td = sale.seller&.name
                   td = sale.buyer&.name
-                  td = sale.purchase_price
+                  td = number_to_currency(sale.purchase_price, unit: "R", separator: ".", delimiter: " ")
                   td = sale.commissions.collect { |c| c.agent.full_name }.join(",")
                   td = sale.originator&.name
                   td = sale.attorney&.name
                   td = sale.bond_attorney&.name
                   td = sale.status&.name
-                  td = sale.updated_at
+                  td = sale.updated_at.strftime("%B %d, %Y")
                   td = sale.registered_on
                   td = sale.comments
                   td = sale.commission_amount

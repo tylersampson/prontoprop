@@ -21,10 +21,13 @@
 //= require notification/SmartNotification
 //= require pace/pace
 //= require controls
+//= require jquery.minicolors
 //= require flash
 
 var ready = function(){
 	pageSetUp();
+
+	$('.colorpicker').minicolors({theme: 'bootstrap'})
 };
 
 $(document).on('turbolinks:load', ready);
