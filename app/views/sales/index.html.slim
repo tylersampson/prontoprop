@@ -23,10 +23,17 @@
               tr
                 th = Sale.human_attribute_name(:reference)
                 th = Sale.human_attribute_name(:contract_start_on)
+                th = Sale.human_attribute_name(:seller)
+                th = Sale.human_attribute_name(:buyer)
                 th = Sale.human_attribute_name(:purchase_price)
+                th = Sale.human_attribute_name(:agent)
                 th = Sale.human_attribute_name(:originator)
+                th = Sale.human_attribute_name(:attorney)
+                th = Sale.human_attribute_name(:bond_attorney)
                 th = Sale.human_attribute_name(:status)
+                th = Sale.human_attribute_name(:updated_at)
                 th = Sale.human_attribute_name(:registered_on)
+                th = Sale.human_attribute_name(:comments)
                 th = Sale.human_attribute_name(:commission_amount)
                 th
             tbody
@@ -34,10 +41,17 @@
                 tr
                   td = link_to sale.reference, sale
                   td = sale.contract_start_on
+                  td = sale.seller&.name
+                  td = sale.buyer&.name
                   td = sale.purchase_price
-                  td = sale.originator.name
-                  td = sale.status.name
+                  td = sale.commissions.collect { |c| c.agent.full_name }.join(",")
+                  td = sale.originator&.name
+                  td = sale.attorney&.name
+                  td = sale.bond_attorney&.name
+                  td = sale.status&.name
+                  td = sale.updated_at
                   td = sale.registered_on
+                  td = sale.comments
                   td = sale.commission_amount
                   td
                     = link_to(I18n.t('edit'), edit_sale_path(sale), class: 'btn btn-primary') if policy(sale).update?

@@ -8,7 +8,7 @@ class SalesController < ApplicationController
   def index
     add_breadcrumb I18n.t('listing', entity: Sale.model_name.human(count: 10))
     @q = policy_scope(Sale).ransack(params[:q])
-    @sales = @q.result.page(params[:page]).per(session[:default_per])
+    @sales = @q.result.includes(:buyer).includes(:seller).includes(:attorney).includes(:bond_attorney).page(params[:page]).per(session[:default_per])
   end
 
   # GET /sales/1

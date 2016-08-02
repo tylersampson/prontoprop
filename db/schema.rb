@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628064612) do
+ActiveRecord::Schema.define(version: 20160802102646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(version: 20160628064612) do
     t.decimal  "tax_amount",        precision: 14, scale: 2
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+    t.text     "comments"
     t.index ["attorney_id"], name: "index_sales_on_attorney_id", using: :btree
     t.index ["bank_id"], name: "index_sales_on_bank_id", using: :btree
     t.index ["bond_attorney_id"], name: "index_sales_on_bond_attorney_id", using: :btree
