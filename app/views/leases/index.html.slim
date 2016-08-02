@@ -2,7 +2,7 @@
 = content_for :actions do
   = link_to(icon('plus', I18n.t('create')), new_lease_path, class: 'btn btn-ribbon btn-success') if policy(Lease).create?
   = link_to(icon('file', I18n.t('import')), '#', class: 'btn btn-ribbon btn-success', data: { toggle: 'modal', target: '#import_modal'})
-  = link_to I18n.t('export'), leases_path(format: "csv")
+  = link_to(I18n.t('export'), leases_path(format: "csv"), class: 'btn btn-ribbon btn-success') if policy(Lease).create?
 - content_for :modals do
   #import_modal.modal.fade
     .modal-dialog

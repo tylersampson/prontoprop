@@ -34,6 +34,7 @@ en:
   remove: "Remove"
   filter: "Filter"
   clear: "Clear"
+  export: "Export"
 
   notices:
     created: "Successfully created %{entity} (ID#%{id})"
