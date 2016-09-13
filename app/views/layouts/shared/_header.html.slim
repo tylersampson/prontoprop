@@ -9,11 +9,10 @@ header#header
         = icon('reorder')
 
   .project-context.hidden-xs
-    span.label Projects:
-    span.project-selector.dropdown-toggle data-toggle="dropdown" Recent Projects #{icon('angle-down')}
-    ul.dropdown-menu
-      li = link_to 'Some project', 'javascript:;'
-  
+    span.label SITE:
+    span.project-selector = current_tenant
+
+
   .pull-right
     #logout.btn-header.transparent.pull-right
       span
@@ -26,4 +25,3 @@ header#header
     #fullscreen.btn-header.transparent.pull-right
       span
         a href="javascript:;" data-action="launchFullscreen" title="Full Screen" = icon('arrows-alt')
-
