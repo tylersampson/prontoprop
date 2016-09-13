@@ -20,7 +20,7 @@ class Rental < ApplicationRecord
 
   before_save :calculate_commissions
 
-  default_scope { where(customer: Customer.current_id) }
+  default_scope { Customer.current_id ? where(customer: Customer.current_id) : all }
 
   def self.import(file)
     completed = 0

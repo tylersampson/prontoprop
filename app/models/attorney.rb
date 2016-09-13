@@ -12,5 +12,5 @@
 #
 
 class Attorney < ApplicationRecord
-  default_scope { where(customer: Customer.current_id) }
+  default_scope { Customer.current_id ? where(customer: Customer.current_id) : all }
 end

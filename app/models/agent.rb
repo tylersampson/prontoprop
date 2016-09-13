@@ -17,7 +17,7 @@ require 'csv'
 class Agent < ApplicationRecord
   validates :first_name, :last_name, :mobile, :email, :tax_percent, presence: true
 
-  default_scope { where(customer: Customer.current_id) }
+  default_scope { Customer.current_id ? where(customer: Customer.current_id) : all }
 
   def full_name
     first_name + " " + last_name
