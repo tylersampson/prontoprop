@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802104545) do
+ActiveRecord::Schema.define(version: 20160913222416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20160802104545) do
     t.integer  "tax_percent"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "customer"
   end
 
   create_table "ahoy_messages", force: :cascade do |t|
@@ -65,12 +66,14 @@ ActiveRecord::Schema.define(version: 20160802104545) do
     t.boolean  "preferred"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "customer"
   end
 
   create_table "banks", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "customer"
   end
 
   create_table "commissions", force: :cascade do |t|
@@ -102,6 +105,7 @@ ActiveRecord::Schema.define(version: 20160802104545) do
     t.decimal  "default_cost", precision: 10, scale: 2
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+    t.string   "customer"
   end
 
   create_table "deductions", force: :cascade do |t|
@@ -135,6 +139,7 @@ ActiveRecord::Schema.define(version: 20160802104545) do
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
     t.integer  "agent_id"
+    t.string   "customer"
     t.index ["agent_id"], name: "index_leases_on_agent_id", using: :btree
     t.index ["lessee_id"], name: "index_leases_on_lessee_id", using: :btree
     t.index ["lessor_id"], name: "index_leases_on_lessor_id", using: :btree
@@ -147,6 +152,7 @@ ActiveRecord::Schema.define(version: 20160802104545) do
     t.boolean  "preferred"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "customer"
   end
 
   create_table "rentals", force: :cascade do |t|
@@ -159,6 +165,7 @@ ActiveRecord::Schema.define(version: 20160802104545) do
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.string   "import_id"
+    t.string   "customer"
     t.index ["lease_id"], name: "index_rentals_on_lease_id", using: :btree
   end
 
@@ -183,6 +190,7 @@ ActiveRecord::Schema.define(version: 20160802104545) do
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.text     "comments"
+    t.string   "customer"
     t.index ["attorney_id"], name: "index_sales_on_attorney_id", using: :btree
     t.index ["bank_id"], name: "index_sales_on_bank_id", using: :btree
     t.index ["bond_attorney_id"], name: "index_sales_on_bond_attorney_id", using: :btree
@@ -221,6 +229,7 @@ ActiveRecord::Schema.define(version: 20160802104545) do
     t.datetime "locked_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "customer"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

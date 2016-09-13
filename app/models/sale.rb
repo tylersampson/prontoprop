@@ -51,6 +51,8 @@ class Sale < ApplicationRecord
     :commission_amount,
     presence: true
 
+  default_scope { where(customer: Customer.current_id) }
+
   before_save do
     self.tax_amount = self.commission_amount - (self.commission_amount / 1.14)
   end

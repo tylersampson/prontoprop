@@ -12,4 +12,5 @@
 #
 
 class Attorney < ApplicationRecord
+  default_scope { where(customer: Customer.current_id) }
 end

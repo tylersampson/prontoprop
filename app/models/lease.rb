@@ -42,6 +42,8 @@ class Lease < ApplicationRecord
     :end_on,
     presence: true
 
+  default_scope { where(customer: Customer.current_id) }
+
   def self.import(file)
     completed = 0
     total = 0

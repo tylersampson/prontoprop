@@ -20,6 +20,8 @@ class Rental < ApplicationRecord
 
   before_save :calculate_commissions
 
+  default_scope { where(customer: Customer.current_id) }
+
   def self.import(file)
     completed = 0
     total = 0
@@ -49,13 +51,13 @@ class Rental < ApplicationRecord
   end
 
   protected
-    
+
     def calculate_commissions
       commissions.destroy_all
       self.commissions.build(
         agent_id: lease.agent_id,
         agent_percent: 50,
-        commission_amount: (nett_commission_amount / 2)        
+        commission_amount: (nett_commission_amount / 2)
       )
     end
 end
